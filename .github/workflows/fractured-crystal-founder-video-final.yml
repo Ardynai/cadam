@@ -1,0 +1,113 @@
+name: Fractured Crystal Founder Video Final
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - .github/workflows/fractured-crystal-founder-video-final.yml
+
+permissions:
+  contents: read
+
+jobs:
+  build-final-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download rendered picture and narration
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p final
+          curl --fail --location --retry 5 --retry-all-errors \
+            'https://v3b.fal.media/files/b/0aa90ea3/uno7CoFTY79nz3N80aDh6_combined_output.mp4' \
+            --output final/source-with-voice.mp4
+          curl --fail --location --retry 5 --retry-all-errors \
+            'https://v3b.fal.media/files/b/0aa90e0f/pdLFjlPHwR1NJw5SSEeeY_output.mp3' \
+            --output final/Fractured_Crystal_YC_Founder_Voice.mp3
+
+      - name: Write exact transcript and styled captions
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > final/Fractured_Crystal_YC_Founder_Transcript.txt <<'EOF'
+          Hi, I’m Josh, founder of Fractured Crystal Technologies.
+
+          Before tech, I built a restaurant and a licensed cannabis grow. I handled permits, equipment, inventory, sales, cooking, cleaning, and cultivation. Most days, I could run either business alone.
+
+          That taught me how I build: learn every job, find the bottlenecks, then design a system one person can operate.
+
+          I’m doing the same with AI. Agents, models, files, permissions, and workflows are scattered across separate products. Fractured Crystal brings them into one governed system.
+
+          Locus is the operating environment. Terminalia is a network of creator-built worlds where people and AI work together. Kortex Audio is the first commercial product: a creator marketplace and studio.
+
+          I built the working foundations solo. I want YC’s help launching the first founder-run beta and turning this connected system into a durable company.
+          EOF
+
+          cat > final/captions.ass <<'EOF'
+          [Script Info]
+          ScriptType: v4.00+
+          PlayResX: 1920
+          PlayResY: 1080
+          ScaledBorderAndShadow: yes
+          WrapStyle: 2
+
+          [V4+ Styles]
+          Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+          Style: Founder,DejaVu Sans,62,&H00FFFFFF,&H00FFFFFF,&H00110B08,&HC0150D09,-1,0,0,0,100,100,0,0,3,4,1,2,120,120,76,1
+
+          [Events]
+          Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+          Dialogue: 0,0:00:00.10,0:00:01.75,Founder,,0,0,0,,Hi, I’m {\c&H00FFE035&}Josh{\c&H00FFFFFF&},
+          Dialogue: 0,0:00:01.76,0:00:03.80,Founder,,0,0,0,,founder of {\c&H00FFE035&}Fractured Crystal Technologies{\c&H00FFFFFF&}.
+          Dialogue: 0,0:00:04.55,0:00:07.75,Founder,,0,0,0,,Before tech, I built a restaurant\Nand a licensed cannabis grow.
+          Dialogue: 0,0:00:08.35,0:00:11.65,Founder,,0,0,0,,I handled permits, equipment,\Ninventory, and sales—
+          Dialogue: 0,0:00:11.66,0:00:14.05,Founder,,0,0,0,,cooking, cleaning,\Nand cultivation.
+          Dialogue: 0,0:00:14.85,0:00:17.15,Founder,,0,0,0,,Most days, I could run\Neither business alone.
+          Dialogue: 0,0:00:17.75,0:00:20.60,Founder,,0,0,0,,That taught me how I build:\N{\c&H004AFFC6&}learn every job{\c&H00FFFFFF&},
+          Dialogue: 0,0:00:20.60,0:00:22.75,Founder,,0,0,0,,{\c&H00D84FFF&}find the bottlenecks{\c&H00FFFFFF&}, then
+          Dialogue: 0,0:00:22.75,0:00:24.55,Founder,,0,0,0,,{\c&H00FFE035&}design a system{\c&H00FFFFFF&}\None person can operate.
+          Dialogue: 0,0:00:24.60,0:00:26.05,Founder,,0,0,0,,I’m doing the same with {\c&H004AFFC6&}AI{\c&H00FFFFFF&}.
+          Dialogue: 0,0:00:26.35,0:00:29.35,Founder,,0,0,0,,Agents, models, files,\Npermissions, and workflows
+          Dialogue: 0,0:00:29.35,0:00:31.35,Founder,,0,0,0,,are scattered across\Nseparate products.
+          Dialogue: 0,0:00:31.80,0:00:34.70,Founder,,0,0,0,,{\c&H00FFE035&}Fractured Crystal{\c&H00FFFFFF&} brings them\Ninto one governed system.
+          Dialogue: 0,0:00:35.15,0:00:37.15,Founder,,0,0,0,,{\c&H00FFE035&}Locus{\c&H00FFFFFF&} is the operating environment.
+          Dialogue: 0,0:00:37.70,0:00:40.75,Founder,,0,0,0,,{\c&H00D84FFF&}Terminalia{\c&H00FFFFFF&} is a network\Nof creator-built worlds
+          Dialogue: 0,0:00:40.75,0:00:43.65,Founder,,0,0,0,,where people and AI\Nwork together.
+          Dialogue: 0,0:00:44.20,0:00:47.30,Founder,,0,0,0,,{\c&H00FFE035&}Kortex Audio{\c&H00FFFFFF&} is the first\Ncommercial product:
+          Dialogue: 0,0:00:47.30,0:00:49.65,Founder,,0,0,0,,a creator marketplace\Nand studio.
+          Dialogue: 0,0:00:50.15,0:00:52.50,Founder,,0,0,0,,I built the working\N{\c&H004AFFC6&}foundations solo{\c&H00FFFFFF&}.
+          Dialogue: 0,0:00:53.05,0:00:56.10,Founder,,0,0,0,,I want {\c&H00D84FFF&}YC’s help{\c&H00FFFFFF&} launching\Nthe first founder-run beta
+          Dialogue: 0,0:00:56.10,0:00:59.70,Founder,,0,0,0,,and turning this connected system\Ninto a {\c&H00FFE035&}durable company{\c&H00FFFFFF&}.
+          EOF
+
+      - name: Burn exact captions and produce one-minute master
+        shell: bash
+        run: |
+          set -euo pipefail
+          ffmpeg -hide_banner -y \
+            -i final/source-with-voice.mp4 \
+            -vf "ass=final/captions.ass" \
+            -t 60 \
+            -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p \
+            -c:a aac -b:a 192k -ar 48000 \
+            -movflags +faststart \
+            final/Fractured_Crystal_YC_Founder_Video_FINAL.mp4
+          ffprobe -v error \
+            -show_entries format=duration,size:stream=index,codec_type,codec_name,width,height,r_frame_rate,sample_rate,channels \
+            -of json final/Fractured_Crystal_YC_Founder_Video_FINAL.mp4 \
+            > final/verification.json
+          sha256sum final/Fractured_Crystal_YC_Founder_Video_FINAL.mp4 \
+            final/Fractured_Crystal_YC_Founder_Voice.mp3 \
+            final/Fractured_Crystal_YC_Founder_Transcript.txt \
+            > final/SHA256SUMS.txt
+          rm final/source-with-voice.mp4
+
+      - name: Upload downloadable final package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fractured-Crystal-YC-Founder-Video-FINAL
+          path: final/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
